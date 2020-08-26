@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>WebSocket test</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+   var wSocket;
+
+   function init() {
+    wSocket = new WebSocket("ws://echo.websocket.org/");
+    wSocket.onopen = function(e) { onOpen(e) };
+    wSocket.onclose = function(e) { onClose(e) };
+    wSocket.onmessage = function(e) { onMessage(e) };
+    wSocket.onerror = function(e) { onError(e) };
+   }
+
+   function onOpen(e) {
+    alert("WebSocket opened!");
+
+    $("#btn_open").attr("disabled", "disabled");
+    $("#btn_close").removeAttr("disabled");
+    $("#btn_send").removeAttr("disabled");
+    $("#message").removeAttr("disabled");
+   }
+
+   function onClose(e) {
+    alert("WebSocket closed!");
+    
+    $("#btn_open").removeAttr("disabled");
+    $("#btn_close").attr("disabled", "disabled");
+    $("#btn_send").attr("disabled", "disabled");
+    $("#message").attr("disabled", "disabled");
+   }
+
+   function onMessage(e) {
+    alert("메시지 수신 : " + e.data);
+   }
+
+   function onError(e) {
+    alert( "오류발생 : " + e.data );
+   }
+
+   function doOpen() {
+    init();
+   }
+
+   function doClose() {
+    wSocket.close();
+   }
+
+   function doSend() {
+    wSocket.send( $("#message").val() );
+   }
+
+   $(function() {
+    $("#btn_open").removeAttr("disabled");
+    $("#btn_close").attr("disabled", "disabled");
+    $("#btn_send").attr("disabled", "disabled");
+    $("#message").attr("disabled", "disabled");
+    init();
+   });
+
+  </script>
+ </head>
+ <body>
+  <input type="button" onclick="doOpen();" value="Open" id="btn_open" />
+  <input type="button" onclick="doClose();" value="Close" id="btn_close" />
+  <label for="message">Message: </label><input type="text" placeholder="Message" id="message" />
+  <input type="button" onclick="doSend();" value="Send" id="btn_send" />
+ </body>
+</html>
