@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Test</title>
+<script type="text/javascript">
+  var imageURLs = [
+       "https://images.unsplash.com/photo-1523224949444-170258978eef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+     , "https://images.unsplash.com/photo-1519582149095-fe7d19b2a3d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+     , "http://www.myserver.com/images/image3.png"
+  ];
+  function getImageTag() {
+    var img = '<img src=\"';
+    var randomIndex = Math.floor(Math.random() * imageURLs.length);
+    img += imageURLs[randomIndex];
+    img += '\" alt=\"Some alt text\"/>';
+    return img;
+  }
+</script>
+</head>
+<body>
+<script type="text/javascript">
+  document.write(getImageTag());
+</script>
+</body>
+</html>
