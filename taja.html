@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    .bg{
+        width: 1920px;
+        height: 1080px;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        background-image: linear-gradient(rgb(173, 173, 173), rgb(117, 117, 117));
+        background-repeat: no-repeat;
+
+        z-index: -9999;
+        
+    }
+    
+    .start{
+        font-size: 200%;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 70%;
+        color: white;
+        background-color: black;
+    }
+
+    .inputText{
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 80%;
+
+        display: none;
+    }
+
+    .words{
+        position: fixed;
+    }
+
+    .hp{
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 83%;
+
+        display: none;
+    }
+
+    .score{
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 86%;
+
+        display: none;
+    }
+
+    .GOblack{
+        position: fixed;
+        left: 0%;
+        top: 0%;
+        height: 1080px;
+        width: 1920px;
+        background-color: black;
+        opacity: 50%;
+
+        display: none;
+        
+        z-index: 10;
+    }
+
+    .gameover{
+
+        color: white;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 20%;
+        font-size: 700%;
+
+        display: none;
+        
+        z-index: 11;
+
+    }
+
+    #finalScore{
+        position: fixed;
+        top: 40%;
+        left: 30%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 300%;
+
+        display: none;
+
+        z-index: 11;
+    }
+
+    #bestScore{
+        position: fixed;
+        top: 40%;
+        left: 70%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 300%;
+
+        display: none;
+
+        z-index: 11;
+    }
+
+    #restart{
+        position: fixed;
+        top: 60%;
+        color: white;
+        left: 30%;
+        transform: translateX(-50%);
+        font-size: 200%;
+
+        display: none;
+
+        z-index: 11;
+
+    }
+
+    #main{
+        position: fixed;
+        top: 60%;
+        color: white;
+        left: 70%;
+        transform: translateX(-50%);
+        font-size: 200%;
+
+        display: none;
+
+        z-index: 11;
+
+    }
+
+
+    
+    </style>
+</head>
+<body>
+
+    
+    <div id="GOblack" class="GOblack"></div>
+    <div id="gameover" class="gameover">GAME OVER</div>
+    <div id="finalScore">score</div>
+    <div id="bestScore">best score</div>
+    <div id="restart">다시시작</div>
+    <div id="main">처음으로</div>
+
+    <div class="bg"></div>
+    <div class="start" id="start">start</div>
+    <input type="text" name="a" id="inputText" class="inputText">
+    <div id="hp" class="hp"></div>
+    <div id="score" class="score"></div>
+
+        <div id="words1"> </div>
+        <div id="words2"> </div>
+        <div id="words3"> </div>
+        <div id="words4"> </div>
+        <div id="words5"> </div>
+        <div id="words6"> </div>
+        <div id="words7"> </div>
+        <div id="words8"> </div>
+        <div id="words9"> </div>
+        <div id="words10"> </div>
+        <div id="words11"> </div>
+        <div id="words12"> </div>
+        <div id="words13"> </div>
+        <div id="words14"> </div>
+        <div id="words15"> </div>
+        <div id="words16"> </div>
+        <div id="words17"> </div>
+        <div id="words18"> </div>
+        <div id="words19"> </div>
+        <div id="words20"> </div>
+        <div id="words21"> </div>
+        <div id="words22"> </div>
+        <div id="words23"> </div>
+        <div id="words24"> </div>
+        <div id="words25"> </div>
+        <div id="words26"> </div>
+        <div id="words27"> </div>
+        <div id="words28"> </div>
+        <div id="words29"> </div>
+        <div id="words30"> </div>
+
+   
+
+</body>
+
+    <script src="korean words.js"></script>
+
+    <script>
+
+    var startup=0; //시작 인식
+    
+    var divNum=1; //div 순서
+    var interAr=[] //인터벌 저장
+    var hp=3;
+    var score=0;
+    var bestScore=0;
+    var fallingInter;
+    
+    
+    function doc(s){
+            return document.getElementById(s)
+    };
+
+    //단어 정함,내려오기 함수
+    function falling(){
+        var divNumT=divNum;
+        var topPos=-1;
+        var leftPos = Math.floor(Math.random()*80)+11;
+        var down=0.07+(score/300);
+        doc("words"+divNum).style.top = topPos+"%";
+        doc("words"+divNum).innerHTML=words[Math.floor(Math.random()*words.length)];
+        doc("words"+divNum).style.position = "fixed";
+        doc("words"+divNum).style.left = leftPos+"%";
+        
+
+        // doc("words"+divNum).style.top = topPos+"%";
+
+        interAr[divNum-1] = setInterval(function(){
+        
+        doc("words"+divNumT).style.top = topPos+"%";
+        topPos+=down;
+
+        },10)
+
+        divNum++;
+        if(divNum==31){
+            divNum=1;
+        };
+    }
+
+
+    //재시작을 눌렀을떄
+    doc("restart").onclick=function(){
+
+        doc("start").style.display = "none";
+        doc("score").style.display = "block";
+        doc("hp").style.display = "block";
+        doc("inputText").style.display = "block";
+
+        doc("GOblack").style.display = "none";
+        doc("gameover").style.display = "none";
+        doc("finalScore").style.display = "none";
+        doc("bestScore").style.display = "none";
+        doc("restart").style.display = "none";
+        doc("main").style.display = "none";
+
+        startup=1;
+        score=0;
+        hp=3;
+
+        for(var i=1; i<31; i++){
+            doc("words"+i).innerHTML="";
+            doc("words"+i).style.top="-1";
+        }
+
+        var time=0;
+
+            fallingInter=setInterval(function(){
+                time++
+
+                if(time>=15){
+                    falling();
+                    time=0;
+                }
+
+            },100)
+    }
+
+
+
+//메인을 눌렀을때
+    doc("main").onclick=function(){
+
+        doc("start").style.display = "block";
+        doc("score").style.display = "none";
+        doc("hp").style.display = "none";
+        doc("inputText").style.display = "none";
+
+        doc("GOblack").style.display = "none";
+        doc("gameover").style.display = "none";
+        doc("finalScore").style.display = "none";
+        doc("bestScore").style.display = "none";
+        doc("restart").style.display = "none";
+        doc("main").style.display = "none";
+
+        for(var i=1; i<31; i++){
+            doc("words"+i).innerHTML="";
+            doc("words"+i).style.top="-1";
+        }
+    }
+
+
+    
+    //땅에 닿았을때
+    setInterval(function(){
+        var divNumT=divNum;
+
+        for(var i=0; i<30; i++){
+
+            if(parseFloat(doc("words"+String(i+1)).style.top)>=100){
+
+                doc("words"+String(i+1)).innerText="";
+                clearInterval(interAr[i]);
+                doc("words"+String(i+1)).style.top = "-1%";
+                hp--;
+                
+                if(hp==0){
+
+                    startup=0;
+
+
+                    doc("GOblack").style.display = "block";
+                    doc("gameover").style.display = "block";
+                    doc("finalScore").style.display = "block";
+                    doc("bestScore").style.display = "block";
+                    doc("restart").style.display = "block";
+                    doc("main").style.display = "block";
+
+                    if(bestScore<=score){
+                        bestScore=score;
+                    }
+
+
+                    for(var i=0; i<30; i++){
+                        clearInterval(interAr[i]);
+                    };
+
+                    clearInterval(fallingInter);
+
+                    
+                }
+            }
+        }
+
+        doc("hp").innerText="HP : "+hp;
+        doc("score").innerText="SCORE : "+score;
+        doc("finalScore").innerText="score : "+score;
+        doc("bestScore").innerText="best score : "+bestScore;
+
+    })
+    
+
+    //start를 눌렀을때
+    doc("start").onclick = function () {
+        doc("start").style.display = "none";
+        doc("score").style.display = "block";
+        doc("hp").style.display = "block";
+        doc("inputText").style.display = "block";
+
+        doc("GOblack").style.display = "none";
+        doc("gameover").style.display = "none";
+        doc("finalScore").style.display = "none";
+        doc("bestScore").style.display = "none";
+        doc("restart").style.display = "none";
+        doc("main").style.display = "none";
+
+        startup=1;
+        score=0;
+        hp=3;
+
+        var time=0;
+
+            fallingInter=setInterval(function(){
+                time++
+
+                if(time>=(15-(score/10))){
+                    falling();
+                    time=0;
+                }
+
+            },100)
+
+    };
+
+    
+
+
+
+
+    //엔터를 눌렀을때
+    window.onkeydown=function(e){
+        if(startup==1){
+            if(e.keyCode==13){
+                if(doc("inputText").value!=""){
+
+                
+                
+                for(var i=0;i<30;i++){
+
+                        if(doc("words"+String(i+1)).innerText==doc("inputText").value){
+
+                            doc("words"+String(i+1)).innerText="";
+                            clearInterval(interAr[i]);
+                            score++;
+                        }
+                    
+                    }
+
+                doc("inputText").value="";
+                }
+            }
+        }
+    };
+
+    </script>
+</html>
