@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Webhook Spam Program</title>
+  </head>
+  <body>
+    <button onclick="sendMessage()">Send</button>
+  </body>
+
+  <script>
+    function sendMessage() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/788218519958978591/TO_w8k2hxN283t9pwaArURbJSr8DcFAnzEcncr1Eq50fKwHeQBp5GCtVXnxfZq6yEt-h");
+
+      request.setRequestHeader('Content-type', 'application/json');
+
+      var params = {
+        username: "good",
+        avatar_url: "",
+        content: "@everyone"
+      }
+
+      request.send(JSON.stringify(params));
+    }
+  </script>
+</html>
